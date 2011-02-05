@@ -22,7 +22,6 @@ public class MakeFile
        time = time.replace(" ", "_");
        time = time.replace(":", "");
 
-       System.out.println(time);
 
        try
        {
