@@ -42,7 +42,7 @@ public class MakeFile
     
     public void input(double x, double y, String d)
     {
-       data = x + "," + y + "," + d;
+       data = x + "," + y + "," + d + "\n";
 
        try
        {
