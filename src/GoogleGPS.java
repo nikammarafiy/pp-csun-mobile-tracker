@@ -11,7 +11,10 @@ package javagoogapitest;
  */
 public class GoogleGPS {
 
-    public float getDistance( GEORoute theRoute, GEOPoint curLoc);
+    public float getDistance( GEORoute theRoute, GEOPoint curLoc)
+    {
+    	//
+    }
     
 
 }
