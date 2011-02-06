@@ -84,6 +84,9 @@ public class MobileTracker extends Applet implements ActionListener {
 			s1 = inputLine1.getText();
 			s2 = inputLine2.getText();
 			
+			s1 = s1.replace(", ", ",");
+			s2 = s2.replace(", ", ",");
+			
 			doSetup();
 
 			String[] piecesofdata1;
