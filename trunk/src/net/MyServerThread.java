@@ -34,7 +34,7 @@ public class MyServerThread extends Thread {
 	private ParamClass curParams;
 	private GEORoute curRoute;
 	private GoogleGPS myGoog;
-	private double routeStartTime;
+	private long routeStartTime;
 
 	/**
 	 * Constructor We need to pass the database through this constructor
