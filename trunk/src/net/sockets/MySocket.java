@@ -251,6 +251,16 @@ public abstract class MySocket {
     public void openSocket() throws IOException {
         doConfig();
     }
+    
+    public void setTimeout( int time )
+    {
+    	try {
+			theSocket.setSoTimeout(time);
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
     /**
      * Returns connection state.
