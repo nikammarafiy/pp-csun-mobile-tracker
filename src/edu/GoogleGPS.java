@@ -74,6 +74,33 @@ public class GoogleGPS {
 
 		return tmpRoute;
 	}
+	
+	public double distBetweenPoints(GEOPoint point1, GEOPoint point2)
+	{
+		//
+		double earthRadius = 3959;		//3959 Miles, 6,371km
+		double lat1, lat2;
+		double long1, long2;
+		
+		lat1 = point1.getLattitude();
+		lat2 = point2.getLattitude();
+		
+		long1 = point1.getLongitude();
+		long2 = point2.getLongitude();
+		
+		double dLat = Math.toRadians( lat1 - lat2 );
+		double dLong = Math.toRadians( long1 - long2 );
+		
+		double result1 = Math.sin(dLat/2) * Math.sin(dLat/2);
+		double result2 = Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+		double result3 = Math.sin(dLong/2) * Math.sin(dLong/2);
+		
+		double tmpResult = result1 + result2 * result3;
+		double result4 = Math.atan2(Math.sqrt(tmpResult), Math.sqrt(1-tmpResult));
+		double theResult = earthRadius * result4;
+		
+		return theResult * 5280;			//Convert to feet
+	}
 
 	private double calcDistance(GEOPoint point1, GEOPoint point2) {
 		//
