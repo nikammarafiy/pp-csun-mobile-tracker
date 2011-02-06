@@ -26,8 +26,11 @@ public class MakeFile
 
        try
        {
-           File file = new File("./routes/" + time + ".txt");
+           File file = new File("C:\\Temp\\SS12\\routes\\" + time + ".txt");
+           
+           if( ! file.exists()){
            file.createNewFile();
+           }
            writer = new BufferedWriter(new FileWriter(file));
        }
        catch (FileNotFoundException e)
