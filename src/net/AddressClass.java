@@ -1,6 +1,8 @@
 package net;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class AddressClass implements Serializable {
 	
@@ -13,7 +15,7 @@ public class AddressClass implements Serializable {
 	private String strStreet;
 	private String strCity;
 	private String strState;
-	private int intZipCode;
+	private Integer intZipCode;
 	private String strCountry;
 	
 	public AddressClass()
@@ -66,7 +68,14 @@ public class AddressClass implements Serializable {
 	public String generateAddr()
 	{
 		//
-		return strStreet + ", " + strCity + ", " + strState + ", " + intZipCode + ", " + strCountry;
+		String tmpStr = strStreet + ", " + strCity + ", " + strState + ", " + intZipCode + ", " + strCountry;
+		try {
+			return URLEncoder.encode(tmpStr, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

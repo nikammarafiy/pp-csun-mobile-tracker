@@ -1,6 +1,8 @@
 package net;
 
-public class WrapperClass {
+import java.io.Serializable;
+
+public class WrapperClass implements Serializable  {
 	
 	public static enum wrapperTypes
 	{

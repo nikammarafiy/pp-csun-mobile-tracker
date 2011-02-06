@@ -56,6 +56,7 @@ public class Client {
                 "Connection accepted by server.\n");
 
         //SHOW GUI CODE HERE
+        waitingOnGUI = true;
         
         //Handle
         startGUIHandling();
