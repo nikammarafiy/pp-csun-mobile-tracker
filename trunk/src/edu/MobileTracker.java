@@ -123,7 +123,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			
 			if( socket == null)
 			{
-				doSetup();
+				doSetup();	//
 			}
 
 			String[] piecesofdata1;
