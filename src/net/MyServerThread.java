@@ -2,6 +2,11 @@
 package net;
 
 //Import the socket package
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import edu.GEORoute;
 import edu.GoogleGPS;
 import master.Main;
@@ -28,6 +33,8 @@ public class MyServerThread extends Thread {
 	private AddressClass startAddr, endAddr;
 	private ParamClass curParams;
 	private GEORoute curRoute;
+	private GoogleGPS myGoog;
+	private double routeStartTime;
 
 	/**
 	 * Constructor We need to pass the database through this constructor
@@ -41,6 +48,7 @@ public class MyServerThread extends Thread {
 		endAddr = null;
 		curParams = null;
 		curRoute = null;
+		myGoog = new GoogleGPS();
 	}
 
 	/**
@@ -49,6 +57,10 @@ public class MyServerThread extends Thread {
 	public void run() {
 		System.out.println("Thread started for client: "
 				+ socket.getInetAddress() + ".");
+		
+		//Setup timer
+		prepTimer();
+		
 		// Perform Read
 		doRead();
 
@@ -58,6 +70,30 @@ public class MyServerThread extends Thread {
 		} catch (Exception e) {
 			System.out.println("Other Socket Close Exception: " + e);
 		}
+	}
+	
+	private void prepTimer()
+	{
+		int delay = 10000; //10 Seconds
+		  ActionListener taskPerformer = new ActionListener() {
+		      public void actionPerformed(ActionEvent evt) {
+		          checkParams();
+		      }
+		  };
+		  new Timer(delay, taskPerformer).start();
+	}
+	
+	private void checkParams()
+	{
+		//
+		if( curRoute == null ) return;
+		
+		//
+		double feetAway = myGoog.getDistance(curRoute, Main.getLastPosition());
+		double loitTime = Main.checkLoitering();
+		double totalTimeMillis = System.currentTimeMillis() - routeStartTime;
+		
+		//Decide what to do
 	}
 
 	/**
@@ -154,6 +190,8 @@ public class MyServerThread extends Thread {
 			String tmpURL = curRoute.getMapURL();
 			this.sendData(curRoute.getImage(tmpURL), wrapperTypes.IMAGE);
 			//this.sendData(tmpURL, wrapperTypes.MAP_URL);
+			
+			routeStartTime = System.currentTimeMillis();
 		}
 	}
 	
