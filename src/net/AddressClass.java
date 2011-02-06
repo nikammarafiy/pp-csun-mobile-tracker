@@ -7,6 +7,7 @@ public class AddressClass implements Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private boolean isStartAddress;
 	private String strStreet;
@@ -19,7 +20,11 @@ public class AddressClass implements Serializable {
 	{
 		//
 	}
-	
+	/*
+	 *  setStartAddress sets the address of the beginning point of route.
+	 *  This method takes street, city, state, and zip code.
+	 * 
+	 */
 	public void setStartAddress(String street, String city, String state, String zipCode)
 	{
 		//
@@ -30,6 +35,10 @@ public class AddressClass implements Serializable {
 		intZipCode = Integer.parseInt(zipCode);
 		strCountry = "USA";
 	}
+	/*
+	 *  setEndAddress is the final point of the chosen route.
+	 *  This method takes name of street, city, state and zip code.
+	 */	
 	
 	public void setEndAddress(String street, String city, String state, String zipCode)
 	{
@@ -42,10 +51,17 @@ public class AddressClass implements Serializable {
 		strCountry = "USA";
 	}
 	
+	/* 
+	 * isStartAdress method checks if the server obtained the starting address of the route.
+	 */
 	public boolean isStartAddress()
 	{
 		return isStartAddress;
 	}
+	
+	/*
+	 * generateAddr method returns the full address.
+	 */
 	
 	public String generateAddr()
 	{
