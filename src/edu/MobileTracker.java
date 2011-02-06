@@ -22,6 +22,10 @@ import net.sockets.SocketFailure;
 
 public class MobileTracker extends Applet implements ActionListener {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6356834955406563726L;
+	/**
 	 * Socket to server
 	 * 
 	 */
@@ -163,7 +167,7 @@ public class MobileTracker extends Applet implements ActionListener {
 				byte[] tmpByte = (byte[])tmpWrap.getData();
 			
 				icon = new ImageIcon(tmpByte);
-				lblAddr1 = new JLabel("Image and Text", icon, JLabel.CENTER);
+				lblAddr1 = new JLabel("", icon, JLabel.CENTER);
 				add(lblAddr1);
 			}
 			tmpWrap = null;
