@@ -169,6 +169,7 @@ public class MobileTracker extends Applet implements ActionListener {
 				icon = new ImageIcon(tmpByte);
 				lblAddr1 = new JLabel("", icon, JLabel.CENTER);
 				add(lblAddr1);
+				this.repaint();
 			}
 			tmpWrap = null;
 			
