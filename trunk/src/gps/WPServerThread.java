@@ -106,8 +106,11 @@ public class WPServerThread {
 			tmpStr = httpData.substring(startIdx+4, endIdx);
 			startIdx = tmpStr.indexOf("Long");
 			endIdx = startIdx + 4;
-			strLat = tmpStr.substring(1,startIdx);
-			strLong = tmpStr.substring(endIdx);
+			strLat = tmpStr.substring(tmpStr.indexOf("Lat") + 3,startIdx-1);
+			strLong = tmpStr.substring(tmpStr.indexOf("Long") + 4,tmpStr.length()-1);
+			
+			System.out.println("\t" + strLat);
+			System.out.println("\t" + strLong);
 			
 			//Save the Lat and Long, and add it to the Main ArrayList
 			x = Double.parseDouble(strLat);
