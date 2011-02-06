@@ -1,0 +1,39 @@
+package net;
+
+public class WrapperClass {
+	
+	public static enum wrapperTypes
+	{
+		ADDRESS, PARAM, MAP_URL, STRING, OTHER
+	};
+	
+	private Object theData;
+	private wrapperTypes theDataType;
+	
+	public WrapperClass()
+	{
+		//
+	}
+	
+	public wrapperTypes getDType()
+	{
+		return theDataType;
+	}
+	
+	public Object getData()
+	{
+		return theData;
+	}
+	
+	public void setData(Object data)
+	{
+		theData = data;
+	}
+	
+	public void setDType( wrapperTypes newType)
+	{
+		theDataType = newType;
+	}
+	
+
+}

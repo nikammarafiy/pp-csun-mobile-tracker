@@ -41,5 +41,16 @@ public class AddressClass implements Serializable {
 		intZipCode = Integer.parseInt(zipCode);
 		strCountry = "USA";
 	}
+	
+	public boolean isStartAddress()
+	{
+		return isStartAddress;
+	}
+	
+	public String generateAddr()
+	{
+		//
+		return strStreet + ", " + strCity + ", " + strState + ", " + intZipCode + ", " + strCountry;
+	}
 
 }
