@@ -4,6 +4,7 @@ package net;
 //Import the socket package
 import edu.GEORoute;
 import edu.GoogleGPS;
+import master.Main;
 import net.WrapperClass.wrapperTypes;
 import net.sockets.*;
 
@@ -18,6 +19,7 @@ public class MyServerThread extends Thread {
 	 * The server socket for this thread
 	 */
 	protected MyServerSocket socket; // Socket
+	 private Main myParent;
 	/**
 	 * Wrapper class for sending and receiving data
 	 */

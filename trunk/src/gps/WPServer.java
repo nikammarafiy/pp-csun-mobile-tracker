@@ -1,4 +1,4 @@
-package wp7test;
+package gps;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import master.Main;
 import net.MyServer;
 import net.MyServerThread;
 import net.sockets.MyServerSocket;
@@ -27,7 +28,7 @@ import net.sockets.MySocket;
  *
  */
 
-public class WPServer {
+public class WPServer extends Thread {
 	
 
     //The Socket Used by the Main MyServer Control Class
@@ -43,8 +44,12 @@ public class WPServer {
      *
      */
     public WPServer() {
-
-        //create socket server and wait for connection requests
+    	//
+    }
+    
+    public void run()
+    {
+    	//create socket server and wait for connection requests
         try {
             serverSocket = new ServerSocket(2795);
             Logger.getLogger(MyServer.class.getName()).log(Level.INFO,
@@ -75,16 +80,6 @@ public class WPServer {
                     "General Exception occurred on Server Socket: {0}.\n",
                     e);
         }
-    }
-
-    /**
-     * Main
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        //Start the server
-        WPServer s = new WPServer();
     }
 
     /**
