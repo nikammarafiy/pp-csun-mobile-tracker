@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -33,6 +34,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	 */
 	protected boolean stop;
 
+	ImageIcon icon;
 	TextField inputLine1 = new TextField(50);
 	TextField inputLine2 = new TextField(50);
 	JLabel label1 = new JLabel(
@@ -56,6 +58,7 @@ public class MobileTracker extends Applet implements ActionListener {
 		add(inputLine1);
 		add(label2);
 		add(inputLine2);
+		
 		inputLine1.addActionListener(this);
 		inputLine2.addActionListener(this);
 
@@ -102,12 +105,19 @@ public class MobileTracker extends Applet implements ActionListener {
 			AddressClass add1 = new AddressClass();
 			add1.setStartAddress(street, city, state, zip);
 			this.sendData(add1, wrapperTypes.ADDRESS);
+			add1 = new AddressClass();
 			add1.setEndAddress(street2, city2, state2, zip2);
 			this.sendData(add1, wrapperTypes.ADDRESS);
 
 			WrapperClass tmpWrap = this.getData();
-			String theMapURL = (String) tmpWrap.getData();
-			inputLine1.setText(theMapURL);
+			//String theMapURL = (String) tmpWrap.getData();
+			byte[] tmpByte = (byte[])tmpWrap.getData();
+			
+			icon = new ImageIcon(tmpByte);
+			label1 = new JLabel("Image and Text", icon, JLabel.CENTER);
+			add(label1);
+			
+			//inputLine1.setText(theMapURL);
 			
 			closeConn();
 		}
