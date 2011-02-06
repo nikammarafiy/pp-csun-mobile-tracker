@@ -14,8 +14,8 @@ public class MobileTracker extends Applet implements ActionListener
     
     TextField inputLine1 = new TextField(50);
     TextField inputLine2 = new TextField(50);
-    JLabel label1 = new JLabel("Enter a Start Address: ");
-    JLabel label2 = new JLabel("Enter a Finish Address: ");
+    JLabel label1 = new JLabel("Enter a Start Address: (eg. Street, City, State, Zip) ");
+    JLabel label2 = new JLabel("Enter a Finish Address: (eg. Street, City, State, Zip) ");
 
    Button clear;
    Button enter;
