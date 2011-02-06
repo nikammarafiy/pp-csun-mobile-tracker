@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import net.AddressClass;
 import net.Client;
+import net.ParamClass;
 import net.WrapperClass;
 import net.WrapperClass.wrapperTypes;
 import net.sockets.MyClientSocket;
@@ -24,7 +25,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	 * Socket to server
 	 * 
 	 */
-	protected MyClientSocket socket;
+	protected AppletSocket socket;
 	/**
 	 * Thread flags
 	 */
@@ -36,16 +37,16 @@ public class MobileTracker extends Applet implements ActionListener {
 
 	ImageIcon icon;
 
-    TextField inputLine1 = new TextField(50);
-    TextField inputLine2 = new TextField(50);
-    TextField inputLine3 = new TextField(50);
-    TextField inputLine4 = new TextField(50);
-    TextField inputLine5 = new TextField(50);
-    JLabel label1 = new JLabel("Enter a Start Address: (eg. Street, City, State, Zip) ");
-    JLabel label2 = new JLabel("Enter a Finish Address: (eg. Street, City, State, Zip) ");
-    JLabel label3 = new JLabel("Enter Loitering TimeOut (mins): ");
-    JLabel label4 = new JLabel("Enter Route Deviation Tolerance (feet): ");
-    JLabel label5 = new JLabel("Enter intended route completion time (mins): ");
+    TextField inputAddr1 = new TextField(50);
+    TextField inputAddr2 = new TextField(50);
+    TextField inputLoitTime = new TextField(50);
+    TextField inputDevFeet = new TextField(50);
+    TextField inputRouteTime = new TextField(50);
+    JLabel lblAddr1 = new JLabel("Enter a Start Address: (eg. Street, City, State, Zip) ");
+    JLabel lblAddr2 = new JLabel("Enter a Finish Address: (eg. Street, City, State, Zip) ");
+    JLabel lblLoitTime = new JLabel("Enter Loitering TimeOut (mins): ");
+    JLabel lblDevTime = new JLabel("Enter Route Deviation Tolerance (feet): ");
+    JLabel lblRouteTime = new JLabel("Enter intended route completion time (mins): ");
 
 	Button clear;
 	Button enter;
@@ -59,21 +60,21 @@ public class MobileTracker extends Applet implements ActionListener {
 	}
 
 	public MobileTracker() {
-		    add(label1);
-	        add(inputLine1);
-	        add(label2);
-	        add(inputLine2);
-	        add(label3);
-	        add(inputLine3);
-	        add(label4);
-	        add(inputLine4);
-	        add(label5);
-	        add(inputLine5);
-	        inputLine1.addActionListener(this);
-	        inputLine2.addActionListener(this);
-	        inputLine3.addActionListener(this);
-	        inputLine4.addActionListener(this);
-	        inputLine5.addActionListener(this);
+		    add(lblAddr1);
+	        add(inputAddr1);
+	        add(lblAddr2);
+	        add(inputAddr2);
+	        add(lblLoitTime);
+	        add(inputLoitTime);
+	        add(lblDevTime);
+	        add(inputDevFeet);
+	        add(lblRouteTime);
+	        add(inputRouteTime);
+	        inputAddr1.addActionListener(this);
+	        inputAddr2.addActionListener(this);
+	        inputLoitTime.addActionListener(this);
+	        inputDevFeet.addActionListener(this);
+	        inputRouteTime.addActionListener(this);
 
 	}
 
@@ -93,12 +94,15 @@ public class MobileTracker extends Applet implements ActionListener {
 		String zip2;
 
 		if (e.target == clear) {
-			inputLine1.setText("");
-			inputLine2.setText("");
+			inputAddr1.setText("");
+			inputAddr2.setText("");
+			inputLoitTime.setText("");
+			inputDevFeet.setText("");
+			inputRouteTime.setText("");
 		}
 		if (e.target == enter) {
-			s1 = inputLine1.getText();
-			s2 = inputLine2.getText();
+			s1 = inputAddr1.getText();
+			s2 = inputAddr2.getText();
 			
 			s1 = s1.replace(", ", ",");
 			s2 = s2.replace(", ", ",");
@@ -120,25 +124,50 @@ public class MobileTracker extends Applet implements ActionListener {
 			city2 = piecesofdata2[1];
 			state2 = piecesofdata2[2];
 			zip2 = piecesofdata2[3];
+			
+			String devFeet, loitTime, routeTime;
+			devFeet = inputDevFeet.getText();
+			loitTime = inputLoitTime.getText();
+			routeTime = inputRouteTime.getText();
+			
+			
+			ParamClass tmpParams = new ParamClass(devFeet,loitTime,routeTime);
+			socket.sendData(tmpParams, wrapperTypes.PARAM);
 
 			AddressClass add1 = new AddressClass();
 			add1.setStartAddress(street, city, state, zip);
-			this.sendData(add1, wrapperTypes.ADDRESS);
+			socket.sendData(add1, wrapperTypes.ADDRESS);
 			add1 = new AddressClass();
 			add1.setEndAddress(street2, city2, state2, zip2);
-			this.sendData(add1, wrapperTypes.ADDRESS);
+			socket.sendData(add1, wrapperTypes.ADDRESS);			
+			
 
-			WrapperClass tmpWrap = this.getData();
-			//String theMapURL = (String) tmpWrap.getData();
-			byte[] tmpByte = (byte[])tmpWrap.getData();
+			WrapperClass tmpWrap = null;
 			
-			icon = new ImageIcon(tmpByte);
-			label1 = new JLabel("Image and Text", icon, JLabel.CENTER);
-			add(label1);
+			while(tmpWrap==null)
+			{
+				tmpWrap = socket.getData();
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			
-			//inputLine1.setText(theMapURL);
+			if( tmpWrap.getDType() == wrapperTypes.IMAGE)
+			{
+				byte[] tmpByte = (byte[])tmpWrap.getData();
 			
-			closeConn();
+				icon = new ImageIcon(tmpByte);
+				lblAddr1 = new JLabel("Image and Text", icon, JLabel.CENTER);
+				add(lblAddr1);
+			}
+			tmpWrap = null;
+			
+			//inputAddr1.setText(theMapURL);
+			
+			//closeConn();
 		}
 
 		return true;
@@ -147,6 +176,11 @@ public class MobileTracker extends Applet implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+	
+	public void alertNotify(String alertText)
+	{
+		//Show alert
+	}
 
 	/**
 	 * Sets up client
@@ -154,7 +188,8 @@ public class MobileTracker extends Applet implements ActionListener {
 	private void doSetup() {
 		// Attempt to connect to the server
 		try {
-			socket = new MyClientSocket("localhost");
+			socket = new AppletSocket("localhost", this);
+			socket.start();
 		} catch (Exception e) {
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE,
 					"Error connectiong to server:{0}\n", e);
@@ -164,46 +199,6 @@ public class MobileTracker extends Applet implements ActionListener {
 		// Inform user
 		Logger.getLogger(Client.class.getName()).log(Level.INFO,
 		"Connection accepted by server.\n");
-	}
-	
-	private void closeConn()
-	{
-		// Close the socket
-		socket.closeSocket();
-		Logger.getLogger(Client.class.getName()).log(Level.INFO,
-		"Client Exiting.\n");
-	}
-
-	/**
-	 * Send Data utility method Child objects call this method using the
-	 * reference they were given when instantiated
-	 * 
-	 * @param data
-	 *            Data to send
-	 * @param dType
-	 *            Data type
-	 */
-	public void sendData(Object data, WrapperClass.wrapperTypes dType) {
-		WrapperClass tmpWrap = new WrapperClass();
-		tmpWrap.setData(data);
-		tmpWrap.setDType(dType);
-
-		socket.sendData(tmpWrap);
-	}
-
-	/**
-	 * Gets data from the socket
-	 * 
-	 * @return Data from socket
-	 */
-	public WrapperClass getData() {
-		try {
-			return socket.readData();
-		} catch (SocketFailure e) {
-			socket.closeSocket();
-			System.exit(1);
-			return null;
-		}
 	}
 
 	/**
