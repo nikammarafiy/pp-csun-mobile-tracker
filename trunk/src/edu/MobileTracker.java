@@ -3,6 +3,7 @@ package edu;
 import java.awt.*;
 import java.awt.event.*;
 import java.applet.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +53,7 @@ public class MobileTracker extends Applet implements ActionListener {
     JLabel lblDevTime = new JLabel("Enter Route Deviation Tolerance (feet): ");
     JLabel lblRouteTime = new JLabel("Enter intended route completion time (mins): ");
     JLabel lblIcon = new JLabel("", JLabel.CENTER);
+    //JLabel lblTest = new 
 
 	Button clear;
 	Button enter;
@@ -63,6 +65,12 @@ public class MobileTracker extends Applet implements ActionListener {
 		enter = new Button("Submit");
 		add(enter);
 		add(lblIcon);
+		try {
+			lblIcon.setIcon(new ImageIcon( new URL("http://www.011000010011001001111010.com/map.gif")));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public MobileTracker() {
@@ -170,7 +178,11 @@ public class MobileTracker extends Applet implements ActionListener {
 			
 				icon = new ImageIcon(tmpByte);
 				lblIcon.setIcon(icon);
-				this.repaint();
+				//lblIcon.revalidate();
+				//lblIcon.repaint();
+				//this.repaint();
+				//this.resize(this.getHeight()+1,this.getWidth()+1);
+				
 				
 			}
 			tmpWrap = null;
