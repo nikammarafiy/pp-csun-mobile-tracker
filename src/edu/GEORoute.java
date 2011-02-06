@@ -1,4 +1,5 @@
 package edu;
+
 import java.util.ArrayList;
 
 
@@ -7,6 +8,8 @@ import java.util.ArrayList;
  * 
  */
 public class GEORoute {
+	
+	private final static String googURL = "http://maps.google.com/maps/api/staticmap?sensor=false&path=weight:3|color:green";
 
     private ArrayList<GEOPoint> myRoute;
 
@@ -35,5 +38,21 @@ public class GEORoute {
         }
         
         return myRoute.get(i);
+    }
+    
+    public String getMapURL()
+    {
+    	//
+    	String tmpURL = GEORoute.googURL;
+    	GEOPoint tmpPoint;
+    	
+    	for( int i = 0; i < myRoute.size();i++)
+    	{
+    		//
+    		tmpPoint = myRoute.get(i);
+    		tmpURL += tmpPoint.getLattitude() + "," + tmpPoint.getLongitude() + "|";
+    	}
+    	
+    	return tmpURL;
     }
 }
