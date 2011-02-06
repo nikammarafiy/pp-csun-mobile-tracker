@@ -1,5 +1,7 @@
 package gps;
 
+import io.MakeFile;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.text.SimpleDateFormat;
@@ -38,6 +40,7 @@ public class WPServer extends Thread {
      *
      */
     public static final String DATE_FORMAT_NOW = "MM/dd/yyyy HH:mm:ss";
+    private MakeFile myFile;
 
     /**
      * Default constructor
@@ -45,6 +48,7 @@ public class WPServer extends Thread {
      */
     public WPServer() {
     	//
+    	myFile = new MakeFile();
     }
     
     public void run()
@@ -67,7 +71,7 @@ public class WPServer extends Thread {
                         MyServer.now());
 
                 //Pass it off to a new thread
-                WPServerThread t = new WPServerThread(socket);
+                WPServerThread t = new WPServerThread(socket, myFile);
                 t.run();
 
             }
