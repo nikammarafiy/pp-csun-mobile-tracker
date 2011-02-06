@@ -78,8 +78,11 @@ public class MobileTracker extends Applet implements ActionListener {
 	}
 
 	public boolean action(Event e, Object args) {
-		String s1 = "";
-		String s2 = "";
+		String s1 ="";
+	    String s2 ="";
+	    String s3 ="";
+	    String s4 ="";
+	    String s5 ="";
 		String street;
 		String city;
 		String state;
