@@ -107,7 +107,10 @@ public class MobileTracker extends Applet implements ActionListener {
 			s1 = s1.replace(", ", ",");
 			s2 = s2.replace(", ", ",");
 			
-			doSetup();
+			if( socket == null)
+			{
+				doSetup();
+			}
 
 			String[] piecesofdata1;
 			String[] piecesofdata2;
@@ -148,7 +151,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			{
 				tmpWrap = socket.getData();
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -191,6 +194,7 @@ public class MobileTracker extends Applet implements ActionListener {
 		try {
 			socket = new AppletSocket("kitchensync.jhl.me", this);
 			socket.start();
+			Thread.sleep(500);
 		} catch (Exception e) {
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE,
 					"Error connectiong to server:{0}\n", e);
