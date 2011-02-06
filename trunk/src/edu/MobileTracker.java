@@ -57,6 +57,7 @@ public class MobileTracker extends Applet implements ActionListener {
 
 	Button clear;
 	Button enter;
+	Button debug;
 
 	public void init() {
 		clear = new Button("Clear");
@@ -64,6 +65,10 @@ public class MobileTracker extends Applet implements ActionListener {
 
 		enter = new Button("Submit");
 		add(enter);
+		
+		debug = new Button("Debug");
+		add(debug);
+		
 		add(lblIcon);
 		try {
 			lblIcon.setIcon(new ImageIcon( new URL("http://www.011000010011001001111010.com/map.gif")));
@@ -106,6 +111,17 @@ public class MobileTracker extends Applet implements ActionListener {
 		String city2;
 		String state2;
 		String zip2;
+		
+		if( e.target == debug)
+		{
+			if( socket == null)
+			{
+				doSetup();
+			}
+			
+			socket.sendData("SENDALRT", wrapperTypes.OTHER);
+			return true;
+		}
 
 		if (e.target == clear) {
 			inputAddr1.setText("");
@@ -123,7 +139,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			
 			if( socket == null)
 			{
-				doSetup();	//
+				doSetup();
 			}
 
 			String[] piecesofdata1;

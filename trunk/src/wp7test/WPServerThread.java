@@ -68,95 +68,29 @@ public class WPServerThread {
 			try {
 				tmpWrapper = new String(socket.readRawData()); // Read the data
 				System.out.println(tmpWrapper);
-				//
-				//runFlag = unWrap(); // Unwrap the data
+				
 			} catch (Exception e) {
 				System.out.println("Exception reading/writing  Streams: " + e);
 				break;
 			}
 		}
 	}
-
-	/**
-	 * Unwraps the data in a wrapper object and performs the appropriate action
-	 * 
-	 * @return A success flag
-	 *//*
-	private boolean unWrap() {
-		// Type var
-		WrapperClass.wrapperTypes tmpType;
-
-		// Double check null
-		if (tmpWrapper != null) {
-			// Get the data type
-			tmpType = tmpWrapper.getDType();
-
-			// Do what we need to depending on the type
-			switch (tmpType) {
+	
+	private void parseGPS(String httpData)
+	{
+		//
+		int startIdx, endIdx;
+		String startDelim = "GET ";
+		String endDelim = "HTTP/1.1";
+		String tmpStr;
+		
+		startIdx = httpData.indexOf(startDelim);
+		endIdx = httpData.indexOf(endDelim);
+		
+		if( startIdx > -1 && endIdx > -1 )
+		{
 			//
-			case ADDRESS:
-				// Address class
-				handleAddress(tmpWrapper.getData());
-				break;
-			case PARAM:
-				//PAram class
-				handleParam(tmpWrapper.getData());
-				break;
-			case STRING:
-				// String Debug handling
-				String tmpStr = (String) tmpWrapper.getData();
-				System.out.println("\nString from client: " + tmpStr + "\n");
-
-				break;
-
-			case OTHER:
-				// Some Other Class Handling
-				break;
-
-			default:
-				// Something weird happened
-				break;
-
-			}
-
 		}
-
-		return true;
-	}*/
-	
-	private void handleAddress(Object tmpObj)
-	{
-		//
-		AddressClass tmpAddr = (AddressClass)tmpObj;
-		
-		if( tmpAddr.isStartAddress() )
-		{
-			startAddr = tmpAddr;
-		}
-		else
-		{
-			endAddr = tmpAddr;
-		}
-		
-		if( startAddr != null && endAddr != null)
-		{
-			//We have both addresses, root
-			//TODO Routing and send back data
-			GoogleGPS tmpGoog = new GoogleGPS();
-			curRoute = tmpGoog.createRoute(startAddr.generateAddr(), endAddr.generateAddr());
-			
-			//Send back the URL to the map
-			String tmpURL = curRoute.getMapURL();
-			this.sendData(curRoute.getImage(tmpURL), wrapperTypes.IMAGE);
-			//this.sendData(tmpURL, wrapperTypes.MAP_URL);
-		}
-	}
-	
-	private void handleParam(Object tmpObj)
-	{
-		//
-		ParamClass tmpParam = (ParamClass)tmpObj;
-		curParams = tmpParam;
 	}
 
 	/**
