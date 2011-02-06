@@ -55,9 +55,11 @@ public class MyServerSocket extends MySocket {
 	    	  while ( (n = is.read(byteChunk)) > 0 ) {
 	    		  tmpBOS.write(byteChunk, 0, n);
 	    		  
-	    		  if( ++tmpCt > 50 ) break;
+	    		  if( ++tmpCt > 10 ) break;
 	    	  }
 	    	  
+	    	  //super.closeSocket();	
+	    	  //super.theSocket.
 	    	  return tmpBOS.toByteArray();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

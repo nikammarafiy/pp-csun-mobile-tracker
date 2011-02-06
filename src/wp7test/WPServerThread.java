@@ -61,11 +61,14 @@ public class WPServerThread {
 	 */
 	private void doRead() {
 		// Read a Wrapper Infinitely long
+		socket.setTimeout(2000);
+		
 		boolean runFlag = true;
 		while (runFlag) {
 			try {
 				tmpWrapper = new String(socket.readRawData()); // Read the data
 				System.out.println(tmpWrapper);
+				//
 				//runFlag = unWrap(); // Unwrap the data
 			} catch (Exception e) {
 				System.out.println("Exception reading/writing  Streams: " + e);
