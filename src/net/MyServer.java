@@ -19,7 +19,7 @@ public class MyServer {
     private ServerSocket serverSocket;
     //
     /**
-     *
+     *   @ Variable DATE_FORMAT_NOW Format for current date
      */
     public static final String DATE_FORMAT_NOW = "MM/dd/yyyy HH:mm:ss";
 
