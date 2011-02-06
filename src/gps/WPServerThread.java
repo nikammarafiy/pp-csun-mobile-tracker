@@ -1,11 +1,16 @@
-package wp7test;
+package gps;
 
+import java.util.Calendar;
+
+import io.MakeFile;
+import master.Main;
 import net.AddressClass;
 import net.ParamClass;
 import net.WrapperClass;
 import net.WrapperClass.wrapperTypes;
 import net.sockets.MyServerSocket;
 import net.sockets.SocketFailure;
+import edu.GEOPoint;
 import edu.GEORoute;
 import edu.GoogleGPS;
 
@@ -16,6 +21,7 @@ public class WPServerThread {
 	 * The server socket for this thread
 	 */
 	protected MyServerSocket socket; // Socket
+	 private MakeFile myFile;
 	/**
 	 * Wrapper class for sending and receiving data
 	 */
@@ -24,6 +30,7 @@ public class WPServerThread {
 	private AddressClass startAddr, endAddr;
 	private ParamClass curParams;
 	private GEORoute curRoute;
+	
 
 	/**
 	 * Constructor We need to pass the database through this constructor
@@ -45,6 +52,9 @@ public class WPServerThread {
 	public void run() {
 		System.out.println("Thread started for client: "
 				+ socket.getInetAddress() + ".");
+		
+		myFile = new MakeFile();
+		
 		// Perform Read
 		doRead();
 
@@ -68,6 +78,7 @@ public class WPServerThread {
 			try {
 				tmpWrapper = new String(socket.readRawData()); // Read the data
 				System.out.println(tmpWrapper);
+				parseGPS(tmpWrapper);
 				
 			} catch (Exception e) {
 				System.out.println("Exception reading/writing  Streams: " + e);
@@ -82,14 +93,29 @@ public class WPServerThread {
 		int startIdx, endIdx;
 		String startDelim = "GET ";
 		String endDelim = "HTTP/1.1";
-		String tmpStr;
+		String tmpStr, strLat, strLong;
+		Double x, y;
+		GEOPoint tmpPoint;
 		
 		startIdx = httpData.indexOf(startDelim);
 		endIdx = httpData.indexOf(endDelim);
 		
 		if( startIdx > -1 && endIdx > -1 )
 		{
-			//
+			//Ok
+			tmpStr = httpData.substring(startIdx+4, endIdx);
+			startIdx = tmpStr.indexOf("Long");
+			endIdx = startIdx + 4;
+			strLat = tmpStr.substring(1,startIdx);
+			strLong = tmpStr.substring(endIdx);
+			
+			//Save the Lat and Long, and add it to the Main ArrayList
+			x = Double.parseDouble(strLat);
+			y = Double.parseDouble(strLong);
+			
+			myFile.input(x, y, Long.toString(System.currentTimeMillis()));
+			tmpPoint = new GEOPoint(x,y);
+			Main.addGEOPoint(tmpPoint);
 		}
 	}
 
@@ -123,6 +149,14 @@ public class WPServerThread {
 			System.exit(1);
 			return null;
 		}
+	}
+	
+	protected void finalize() throws Throwable {
+	    try {
+	        myFile.closefile();        // close open files
+	    } finally {
+	        super.finalize();
+	    }
 	}
 }
 

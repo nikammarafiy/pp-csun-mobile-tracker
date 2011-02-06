@@ -7,16 +7,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import master.Main;
 import net.sockets.*;
 
 /**
  * MyServer class for handling requests
  *
  */
-public class MyServer {
+public class MyServer extends Thread {
 
     //The Socket Used by the Main MyServer Control Class
     private ServerSocket serverSocket;
+    private Main myParent;
     //
     /**
      *   @ Variable DATE_FORMAT_NOW Format for current date
@@ -29,7 +32,12 @@ public class MyServer {
      */
     public MyServer() {
 
-        //create socket server and wait for connection requests
+        //
+    }
+    
+    public void run()
+    {
+    	//create socket server and wait for connection requests
         try {
             serverSocket = new ServerSocket(MySocket.COMM_PORT);
             Logger.getLogger(MyServer.class.getName()).log(Level.INFO,
@@ -60,16 +68,7 @@ public class MyServer {
                     "General Exception occurred on Server Socket: {0}.\n",
                     e);
         }
-    }
-
-    /**
-     * Main
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        //Start the server
-        MyServer s = new MyServer();
+        
     }
 
     /**

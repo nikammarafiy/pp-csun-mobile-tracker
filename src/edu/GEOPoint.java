@@ -6,8 +6,8 @@ package edu;
 public class GEOPoint implements Comparable {
 
     //Coordinates
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
     /**
      * Constructor that takes a latitude and longitude
@@ -33,7 +33,7 @@ public class GEOPoint implements Comparable {
      * @param latitudeE6 A float representing a latitude
      * @param longitudeE6 A float representing a longitude
      */
-    public GEOPoint(float latitudeE6, float longitudeE6) {
+    public GEOPoint(double latitudeE6, double longitudeE6) {
         latitude = latitudeE6;
         longitude = longitudeE6;
     }
@@ -42,7 +42,7 @@ public class GEOPoint implements Comparable {
      *
      * @return The Latitude
      */
-    public float getLattitude() {
+    public double getLattitude() {
         return latitude;
     }
 
@@ -50,7 +50,7 @@ public class GEOPoint implements Comparable {
      *
      * @return The longitude
      */
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
     
@@ -80,7 +80,7 @@ public class GEOPoint implements Comparable {
     public int compareTo(Object o) {
         if (o instanceof GEOPoint) {
             GEOPoint tmpGEO = (GEOPoint) o;
-            return Float.compare(tmpGEO.getLattitude()
+            return Double.compare(tmpGEO.getLattitude()
                     + tmpGEO.getLongitude(), latitude + longitude);
         } else {
             return -1;
