@@ -1,5 +1,10 @@
 package edu;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -10,7 +15,7 @@ import java.util.ArrayList;
 public class GEORoute {
 	
 	//Google url for map image
-	private final static String googURL = "http://maps.google.com/maps/api/staticmap?sensor=false&path=weight:3|color:green";
+	private final static String googURL = "http://maps.google.com/maps/api/staticmap?sensor=false&size=512x512&maptype=roadmap&path=weight:5|color:green";
 
 	//Storage for the GEOPoints
     private ArrayList<GEOPoint> myRoute;
@@ -75,6 +80,48 @@ public class GEORoute {
     		tmpURL += tmpPoint.getLattitude() + "," + tmpPoint.getLongitude() + "|";
     	}
     	
-    	return tmpURL;
+    	return tmpURL.substring(0, tmpURL.length() - 2);
+    }
+    
+    public byte[] getImage(String theURL)
+    {
+    	//
+    	URL newURL = null;
+    	try {
+			newURL = new URL(theURL);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	/*ArrayList<byte[]> tmpByte = new ArrayList<byte[]>();
+    	byte[] tmpArr;*/
+    	
+    	ByteArrayOutputStream bais = new ByteArrayOutputStream();
+    	InputStream is = null;
+    	try {
+    	  is = newURL.openStream();
+    	  byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
+    	  int n;
+
+    	  while ( (n = is.read(byteChunk)) > 0 ) {
+    	    bais.write(byteChunk, 0, n);
+    	  }
+    	}
+    	catch (IOException e) {
+    	  System.err.printf ("Failed while reading bytes from %s: %s", newURL.toExternalForm(), e.getMessage());
+    	  e.printStackTrace ();
+    	  // Perform any other exception handling that's appropriate.
+    	}
+    	finally {
+    	  if (is != null) { try {
+			is.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} }
+    	}
+    	
+    	return bais.toByteArray();
     }
 }

@@ -149,7 +149,8 @@ public class MyServerThread extends Thread {
 			
 			//Send back the URL to the map
 			String tmpURL = curRoute.getMapURL();
-			this.sendData(tmpURL, wrapperTypes.MAP_URL);
+			this.sendData(curRoute.getImage(tmpURL), wrapperTypes.IMAGE);
+			//this.sendData(tmpURL, wrapperTypes.MAP_URL);
 		}
 	}
 	

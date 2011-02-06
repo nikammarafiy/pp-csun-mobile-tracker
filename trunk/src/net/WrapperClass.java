@@ -6,7 +6,7 @@ public class WrapperClass implements Serializable  {
 	
 	public static enum wrapperTypes
 	{
-		ADDRESS, PARAM, MAP_URL, STRING, OTHER
+		ADDRESS, PARAM, MAP_URL, IMAGE, STRING, OTHER
 	};
 	
 	private Object theData;
