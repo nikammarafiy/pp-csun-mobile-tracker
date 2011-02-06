@@ -1,6 +1,4 @@
 package edu;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.applet.*;
@@ -11,14 +9,14 @@ import javax.swing.JOptionPane;
 
 public class MobileTracker extends Applet implements ActionListener
 {
-    
+
     TextField inputLine1 = new TextField(50);
     TextField inputLine2 = new TextField(50);
     JLabel label1 = new JLabel("Enter a Start Address: (eg. Street, City, State, Zip) ");
     JLabel label2 = new JLabel("Enter a Finish Address: (eg. Street, City, State, Zip) ");
 
-   Button clear;
-   Button enter;
+    Button clear;
+    Button enter;
 
    public void init ()
    {
@@ -40,21 +38,22 @@ public class MobileTracker extends Applet implements ActionListener
         inputLine1.addActionListener(this);
         inputLine2.addActionListener(this);
 
-        
+
     }
 
   public boolean action (Event e, Object args)
   {
     if (e.target == clear)
     {
-        
+        inputLine1.setText("");
+        inputLine2.setText("");
     }
     if (e.target == enter)
     {
         String s1 = inputLine1.getText();
         String s2 = inputLine2.getText();
-        
-        
+
+
 
     }
     return true;
