@@ -26,13 +26,13 @@ public class AppletSocket extends Thread {
     protected boolean stop;
     
     protected String hostAddr;
-    protected Object myParent;
+    protected MobileTracker myParent;
     protected WrapperClass myData;
 
     /**
      * Default constructor
      */
-    public AppletSocket(String theHost, Object parent) {
+    public AppletSocket(String theHost, MobileTracker parent) {
         waitingOnGUI = true;
         hostAddr = theHost;
         myParent = parent;
@@ -93,8 +93,7 @@ public class AppletSocket extends Thread {
         	{
         		//We have an alert, tell the thread owner
         		String tmpStr = (String)tmpWrap.getData();
-        		NotifyMe tmpTracker = (NotifyMe)myParent;
-        		tmpTracker.alertNotify(tmpStr);
+        		myParent.alertNotify(tmpStr);
         		myData = null;
         	}
         	else
