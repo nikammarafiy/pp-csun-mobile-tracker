@@ -53,7 +53,7 @@ public class MobileTracker extends Applet implements ActionListener {
     JLabel lblDevTime = new JLabel("Enter Route Deviation Tolerance (feet): ");
     JLabel lblRouteTime = new JLabel("Enter intended route completion time (mins): ");
     JLabel lblIcon = new JLabel("", JLabel.CENTER);
-    //JLabel lblTest = new 
+    //JLabel lblTest = new blah
 
 	Button clear;
 	Button enter;
