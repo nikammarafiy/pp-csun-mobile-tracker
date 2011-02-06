@@ -26,7 +26,7 @@ public class MakeFile
 
        try
        {
-           File file = new File(time + ".txt");
+           File file = new File("./routes/" + time + ".txt");
            writer = new BufferedWriter(new FileWriter(file));
        }
        catch (FileNotFoundException e)
