@@ -218,7 +218,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	public void alertNotify(String alertText)
 	{
 		//Show alert
-		JOptionPane.showConfirmDialog(this, alertText, "MobileTracker", 3, 0);
+		JOptionPane.showConfirmDialog(this, alertText, "MobileTracker", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
