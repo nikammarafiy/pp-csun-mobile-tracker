@@ -52,14 +52,13 @@ public class MobileTracker extends Applet implements ActionListener
     {
         String s1 = inputLine1.getText();
         String s2 = inputLine2.getText();
-
-
-
     }
     return true;
    }
+  
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) 
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
