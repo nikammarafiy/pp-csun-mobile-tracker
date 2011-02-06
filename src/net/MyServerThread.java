@@ -160,6 +160,11 @@ public class MyServerThread extends Thread {
 		ParamClass tmpParam = (ParamClass)tmpObj;
 		curParams = tmpParam;
 	}
+	
+	public void sendAlert(String alertText)
+	{
+		sendData(alertText, wrapperTypes.ALERT);
+	}
 
 	/**
 	 * Send Data utility method Child objects call this method using the
