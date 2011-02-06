@@ -38,12 +38,13 @@ public class WPServerThread {
 	 * @param socket
 	 *            The socket this Thread will use
 	 */
-	public WPServerThread(MyServerSocket socket) {
+	public WPServerThread(MyServerSocket socket, MakeFile myFile) {
 		this.socket = socket;
 		startAddr = null;
 		endAddr = null;
 		curParams = null;
 		curRoute = null;
+		this.myFile = myFile;
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class WPServerThread {
 		System.out.println("Thread started for client: "
 				+ socket.getInetAddress() + ".");
 		
-		myFile = new MakeFile();
+		//myFile = new MakeFile();
 		
 		// Perform Read
 		doRead();
