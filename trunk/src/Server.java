@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Server class for handling requests
  *
  */
-public class Server {
+public class Server extends Thread {
 
     //The Socket Used by the Main Server Control Class
     private DatagramSocket serverSocket;
@@ -26,8 +26,11 @@ public class Server {
      *
      */
     public Server() {
-
-        //create socket server and wait for connection requests
+    	//Init vars
+    }
+    
+    public void run() {
+    	//create socket server and wait for connection requests
     	byte[] recBuffer;
     	
         try {
@@ -63,7 +66,7 @@ public class Server {
                     "General Exception occurred on Server Socket: {0}.\n",
                     e);
         }
-    }
+	}
 
     /**
      * Main
@@ -73,6 +76,7 @@ public class Server {
     public static void main(String[] args) {
         //Start the server
         Server s = new Server();
+        s.run();
     }
     
     /**
