@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class ParamClass implements Serializable {
 
 	/**
-	 *  @param loiteringTime Maximum number of seconds that a child must stay in a same spot.
-	 *  @param deviationFeet Maximum range of distance that a child can be apart from the route.
+	 *  @variable  loiteringTime Maximum number of seconds that a child must stay in a same spot.
+	 *  @variable  deviationFeet Maximum range of distance that a child can be apart from the route.
 	 */
 	private static final long serialVersionUID = 1L;
 	double loiteringTime, deviationFeet;
