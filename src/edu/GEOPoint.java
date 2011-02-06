@@ -62,6 +62,15 @@ public class GEOPoint implements Comparable {
     {
     	return latitude + "," + longitude;
     }
+    
+    /**
+     * getData Method that returns a String as 
+     * Latitude,Longitude
+     */
+    public String getData()
+    {
+    	return latitude + "," + longitude;
+    }
 
     /**
      * Sorting
