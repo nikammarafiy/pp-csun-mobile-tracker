@@ -148,7 +148,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			{
 				tmpWrap = socket.getData();
 				try {
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -189,7 +189,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	private void doSetup() {
 		// Attempt to connect to the server
 		try {
-			socket = new AppletSocket("localhost", this);
+			socket = new AppletSocket("kitchensync.jhl.me", this);
 			socket.start();
 		} catch (Exception e) {
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE,
