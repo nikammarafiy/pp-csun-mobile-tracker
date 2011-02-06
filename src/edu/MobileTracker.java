@@ -35,12 +35,17 @@ public class MobileTracker extends Applet implements ActionListener {
 	protected boolean stop;
 
 	ImageIcon icon;
-	TextField inputLine1 = new TextField(50);
-	TextField inputLine2 = new TextField(50);
-	JLabel label1 = new JLabel(
-	"Enter a Start Address: (eg. Street, City, State, Zip) ");
-	JLabel label2 = new JLabel(
-	"Enter a Finish Address: (eg. Street, City, State, Zip) ");
+
+    TextField inputLine1 = new TextField(50);
+    TextField inputLine2 = new TextField(50);
+    TextField inputLine3 = new TextField(50);
+    TextField inputLine4 = new TextField(50);
+    TextField inputLine5 = new TextField(50);
+    JLabel label1 = new JLabel("Enter a Start Address: (eg. Street, City, State, Zip) ");
+    JLabel label2 = new JLabel("Enter a Finish Address: (eg. Street, City, State, Zip) ");
+    JLabel label3 = new JLabel("Enter Loitering TimeOut (mins): ");
+    JLabel label4 = new JLabel("Enter Route Deviation Tolerance (feet): ");
+    JLabel label5 = new JLabel("Enter intended route completion time (mins): ");
 
 	Button clear;
 	Button enter;
@@ -54,13 +59,21 @@ public class MobileTracker extends Applet implements ActionListener {
 	}
 
 	public MobileTracker() {
-		add(label1);
-		add(inputLine1);
-		add(label2);
-		add(inputLine2);
-		
-		inputLine1.addActionListener(this);
-		inputLine2.addActionListener(this);
+		    add(label1);
+	        add(inputLine1);
+	        add(label2);
+	        add(inputLine2);
+	        add(label3);
+	        add(inputLine3);
+	        add(label4);
+	        add(inputLine4);
+	        add(label5);
+	        add(inputLine5);
+	        inputLine1.addActionListener(this);
+	        inputLine2.addActionListener(this);
+	        inputLine3.addActionListener(this);
+	        inputLine4.addActionListener(this);
+	        inputLine5.addActionListener(this);
 
 	}
 
