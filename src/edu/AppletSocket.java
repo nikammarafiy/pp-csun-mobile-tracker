@@ -44,7 +44,7 @@ public class AppletSocket extends Thread {
 	public void run() {
         //Attempt to connect to the server
         try {
-            socket = new MyClientSocket("localhost");
+            socket = new MyClientSocket(hostAddr);
         } catch (Exception e) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, 
                     "Error connectiong to server:{0}\n", e);
