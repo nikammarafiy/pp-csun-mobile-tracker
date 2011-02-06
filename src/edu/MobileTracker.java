@@ -51,6 +51,7 @@ public class MobileTracker extends Applet implements ActionListener {
     JLabel lblLoitTime = new JLabel("Enter Loitering TimeOut (mins): ");
     JLabel lblDevTime = new JLabel("Enter Route Deviation Tolerance (feet): ");
     JLabel lblRouteTime = new JLabel("Enter intended route completion time (mins): ");
+    JLabel lblIcon = new JLabel("", JLabel.CENTER);
 
 	Button clear;
 	Button enter;
@@ -61,6 +62,7 @@ public class MobileTracker extends Applet implements ActionListener {
 
 		enter = new Button("Submit");
 		add(enter);
+		add(lblIcon);
 	}
 
 	public MobileTracker() {
@@ -167,9 +169,9 @@ public class MobileTracker extends Applet implements ActionListener {
 				byte[] tmpByte = (byte[])tmpWrap.getData();
 			
 				icon = new ImageIcon(tmpByte);
-				lblAddr1 = new JLabel("", icon, JLabel.CENTER);
-				add(lblAddr1);
+				lblIcon.setIcon(icon);
 				this.repaint();
+				
 			}
 			tmpWrap = null;
 			
