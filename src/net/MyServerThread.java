@@ -113,6 +113,7 @@ public class MyServerThread extends Thread {
 
 			case OTHER:
 				// Some Other Class Handling
+				sendAlert( "This is a test, only a test");
 				break;
 
 			default:
