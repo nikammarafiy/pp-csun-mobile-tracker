@@ -1,7 +1,8 @@
 package net.sockets;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.io.ByteArrayOutputStream;
 
 
 
@@ -21,6 +22,12 @@ public class MyServerSocket extends MySocket {
         theSocket = newSocket;
         openSocket();
     }
+    
+    public MyServerSocket(Socket newSocket, boolean isRaw) throws IOException {
+        super();
+        theSocket = newSocket;
+        //openSocket();
+    }
 
     /**
      * Sets up the socket, overridden in case the Server needed to
@@ -33,5 +40,46 @@ public class MyServerSocket extends MySocket {
 
         //Everything went okay
         return super.doSetup();
+    }
+    
+    public byte[] readRawData()
+    {
+    	//
+    	try {
+			InputStream is = super.theSocket.getInputStream();
+			ByteArrayOutputStream tmpBOS = new ByteArrayOutputStream();
+			 byte[] byteChunk = new byte[8]; // Or whatever size you want to read in at a time.
+	    	  int n, tmpCt = 0;
+	    	  
+
+	    	  while ( (n = is.read(byteChunk)) > 0 ) {
+	    		  tmpBOS.write(byteChunk, 0, n);
+	    		  
+	    		  if( ++tmpCt > 50 ) break;
+	    	  }
+	    	  
+	    	  return tmpBOS.toByteArray();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+    	
+    }
+    
+    public Object readRawData2()
+    {
+    	try {
+			return super.socketIn.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
     }
 }
