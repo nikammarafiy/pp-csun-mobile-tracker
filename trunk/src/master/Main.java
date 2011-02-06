@@ -1,11 +1,17 @@
 package master;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
+
 
 
 import net.MyServer;
 
 import edu.GEOPoint;
+import edu.GoogleGPS;
 import gps.WPServer;
 
 public class Main {
@@ -23,7 +29,9 @@ public class Main {
 		//Start a GPS Server
 		WPServer gpsSrv = new WPServer();
 		gpsSrv.start();
-
+		
+		//
+		
 	}
 	
 	public static GEOPoint getLastPosition()
@@ -54,6 +62,33 @@ public class Main {
 		{
 			lastPoints.remove(74);
 		}
+	}
+	
+	public static double checkLoitering()
+	{
+		//
+		double tmpDist = 0, tmpTime = 0;
+		GoogleGPS tmpGoog = new GoogleGPS();
+		GEOPoint tmpGEO1, tmpGEO2;
+		
+		//Loop through last known points and determine loitering
+		for( int i = 0; i < lastPoints.size()-1; i++)
+		{
+			//
+			tmpGEO1 = lastPoints.get(i);
+			tmpGEO2 = lastPoints.get(i+1);
+			
+			tmpDist = tmpGoog.distBetweenPoints(tmpGEO1, tmpGEO2);
+			
+			System.out.println("Distance between: " + tmpDist);
+			
+			if( tmpDist < 30.0)
+			{
+				tmpTime += 5.0;
+			}
+		}
+		
+		return tmpTime;
 	}
 
 }
