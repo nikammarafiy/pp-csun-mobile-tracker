@@ -40,7 +40,7 @@ public class GEOPoint implements Comparable {
 
     /**
      *
-     * @return The Lattitude
+     * @return The Latitude
      */
     public float getLattitude() {
         return latitude;
@@ -52,6 +52,15 @@ public class GEOPoint implements Comparable {
      */
     public float getLongitude() {
         return longitude;
+    }
+    
+    /**
+     * ToString Method that returns a String as 
+     * Latitude,Longitude
+     */
+    public String toString()
+    {
+    	return latitude + "," + longitude;
     }
 
     /**
