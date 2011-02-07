@@ -28,7 +28,7 @@ public class ParamClass implements Serializable {
 	{
 		this.loiteringTime = Double.parseDouble(loiteringTime);
 		this.deviationFeet = Double.parseDouble(deviationFeet);
-		this.routeTime = Long.parseLong(routeTime);
+		this.routeTime = (long)(Double.parseDouble(routeTime)*60);
 	}
 	
 	/*
