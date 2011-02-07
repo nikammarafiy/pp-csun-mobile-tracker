@@ -261,6 +261,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	private void getMap()
 	{
 		//
+		int intCt = 0;
 		
 		if(! didTheySubmit) return;
 		
@@ -277,6 +278,7 @@ public class MobileTracker extends Applet implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			if( intCt++ > 30) return;
 		}
 		
 		if( tmpWrap.getDType() == wrapperTypes.IMAGE)
