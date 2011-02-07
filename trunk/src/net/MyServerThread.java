@@ -86,7 +86,7 @@ public class MyServerThread extends Thread {
 	private void checkParams()
 	{
 		//
-		if( curRoute == null ) return;
+		if( curRoute == null || Main.getLastPosition() == null ) return;
 		
 		//
 		double feetAway = myGoog.getDistance(curRoute, Main.getLastPosition());
