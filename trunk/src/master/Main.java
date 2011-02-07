@@ -14,7 +14,11 @@ import net.MyServer;
 import edu.GEOPoint;
 import edu.GoogleGPS;
 import gps.WPServer;
-
+/**
+ * 
+ * Main server class
+ *
+ */
 public class Main {
 	
 	private static ArrayList<GEOPoint> lastPoints = new ArrayList<GEOPoint>(75);

@@ -23,6 +23,10 @@ import net.WrapperClass.wrapperTypes;
 import net.sockets.MyClientSocket;
 import net.sockets.SocketFailure;
 
+/**
+ * GUI Client Class
+ *
+ */
 public class MobileTracker extends Applet implements ActionListener {
 	/**
 	 * 

@@ -122,7 +122,7 @@ public class GEORoute {
     	  }
     	}
     	catch (IOException e) {
-    	  System.err.printf ("Failed while reading bytes from %s: %s", newURL.toExternalForm(), e.getMessage());
+    	  System.err.printf ("Failed while reading bytes from: %s", e.getMessage());
     	  e.printStackTrace ();
     	  // Perform any other exception handling that's appropriate.
     	}
