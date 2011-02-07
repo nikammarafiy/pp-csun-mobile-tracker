@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:AccessingWP7Devices.Models">
+
+    <models:ResourcePicture x:Key="1" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Koala.jpg" Note="Koala.jpg" DateTaken="Monday, October 25, 2010" Position="47.639739, -122.127275" />
+    <models:ResourcePicture x:Key="2" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Lighthouse.jpg" Note="Lighthouse" DateTaken="Monday, October 25, 2010" Position="47.639987, -122.127501" />
+    <models:ResourcePicture x:Key="3" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Penguins.jpg" Note="Penguins" DateTaken="Monday, October 25, 2010" Position="47.639481, -122.127075" />
+    <models:ResourcePicture x:Key="4" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Baskets.jpg" Note="Baskets" DateTaken="Monday, October 25, 2010" Position="47.639139, -122.127275" />
+    <models:ResourcePicture x:Key="5" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Cat.jpg" Note="Cat" DateTaken="Monday, October 25, 2010" Position="47.639987, -122.127201" />
+    <models:ResourcePicture x:Key="6" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Giraffe.jpg" Note="Giraffe" DateTaken="Monday, October 25, 2010" Position="47.639381, -122.127075" />
+    <models:ResourcePicture x:Key="7" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Peppers.jpg" Note="Peppers" DateTaken="Monday, October 25, 2010" Position="47.639487, -122.127501" />
+    <models:ResourcePicture x:Key="8" ResourceUri="/AccessingWP7Devices;component/Resources/Sample/Trees.jpg" Note="Trees" DateTaken="Monday, October 25, 2010" Position="47.639481, -122.127275" />
+    
+</ResourceDictionary>
