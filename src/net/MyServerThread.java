@@ -74,7 +74,7 @@ public class MyServerThread extends Thread {
 	
 	private void prepTimer()
 	{
-		int delay = 10000; //10 Seconds
+		int delay = 5000; //10 Seconds
 		  ActionListener taskPerformer = new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
 		          checkParams();

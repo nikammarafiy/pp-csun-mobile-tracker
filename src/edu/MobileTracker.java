@@ -270,20 +270,21 @@ public class MobileTracker extends Applet implements ActionListener {
 		socket.sendData("GIVEME",wrapperTypes.MAP_REQ);
 		
 		
-		while(tmpWrap==null)
+		while(tmpWrap==null && intCt++ < 30)
 		{
 			tmpWrap = socket.getData();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(250);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			if( intCt++ > 30) return;
+			//if( intCt++ > 30) return;
 		}
 		
 		if( tmpWrap.getDType() == wrapperTypes.IMAGE)
 		{
+			System.out.println("I updated the image.");
 			byte[] tmpByte = (byte[])tmpWrap.getData();
 		
 			icon = new ImageIcon(tmpByte);
