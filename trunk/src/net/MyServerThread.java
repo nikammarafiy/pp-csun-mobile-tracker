@@ -61,7 +61,7 @@ public class MyServerThread extends Thread {
 				+ socket.getInetAddress() + ".");
 		
 		//Setup timer
-		prepTimer();
+		//prepTimer();
 		
 		// Perform Read
 		doRead();
@@ -74,6 +74,7 @@ public class MyServerThread extends Thread {
 		}
 	}
 	
+	/*
 	private void prepTimer()
 	{
 		int delay = 20000; //10 Seconds
@@ -83,7 +84,7 @@ public class MyServerThread extends Thread {
 		      }
 		  };
 		  new Timer(delay, taskPerformer).start();
-	}
+	}*/
 	
 	private void checkParams()
 	{
@@ -175,6 +176,8 @@ public class MyServerThread extends Thread {
 				break;
 
 			}
+			
+			checkParams();
 
 		}
 
