@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 import net.AddressClass;
 import net.Client;
@@ -38,7 +39,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	/**
 	 * Stop flag
 	 */
-	protected boolean stop;
+	protected boolean stop, didTheySubmit;
 
 	ImageIcon icon;
 
@@ -94,6 +95,9 @@ public class MobileTracker extends Applet implements ActionListener {
 	        inputLoitTime.addActionListener(this);
 	        inputDevFeet.addActionListener(this);
 	        inputRouteTime.addActionListener(this);
+	        
+	        didTheySubmit = false;
+	        prepTimer();
 
 	}
 
@@ -181,7 +185,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			{
 				tmpWrap = socket.getData();
 				try {
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -202,6 +206,8 @@ public class MobileTracker extends Applet implements ActionListener {
 				
 			}
 			tmpWrap = null;
+			
+			didTheySubmit = true;
 			
 			//inputAddr1.setText(theMapURL);
 			
@@ -239,6 +245,54 @@ public class MobileTracker extends Applet implements ActionListener {
 		// Inform user
 		Logger.getLogger(Client.class.getName()).log(Level.INFO,
 		"Connection accepted by server.\n");
+	}
+	
+	private void prepTimer()
+	{
+		int delay = 15000; //15 Seconds
+		  ActionListener taskPerformer = new ActionListener() {
+		      public void actionPerformed(ActionEvent evt) {
+		          getMap();
+		      }
+		  };
+		  new Timer(delay, taskPerformer).start();
+	}
+	
+	private void getMap()
+	{
+		//
+		
+		if(! didTheySubmit) return;
+		
+		WrapperClass tmpWrap = null;
+		socket.sendData("GIVEME",wrapperTypes.MAP_REQ);
+		
+		
+		while(tmpWrap==null)
+		{
+			tmpWrap = socket.getData();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if( tmpWrap.getDType() == wrapperTypes.IMAGE)
+		{
+			byte[] tmpByte = (byte[])tmpWrap.getData();
+		
+			icon = new ImageIcon(tmpByte);
+			lblIcon.setIcon(icon);
+			//lblIcon.revalidate();
+			//lblIcon.repaint();
+			//this.repaint();
+			//this.resize(this.getHeight()+1,this.getWidth()+1);
+			
+			
+		}
+		tmpWrap = null;
 	}
 
 	/**
