@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import master.Main;
+
 
 /**
  * Class that holds route data for the specified path
@@ -72,6 +74,7 @@ public class GEORoute {
     	//
     	String tmpURL = GEORoute.googURL;
     	GEOPoint tmpPoint;
+    	GEOPoint curPos = Main.getLastPosition();
     	
     	for( int i = 0; i < myRoute.size();i++)
     	{
@@ -80,7 +83,11 @@ public class GEORoute {
     		tmpURL += tmpPoint.getLattitude() + "," + tmpPoint.getLongitude() + "|";
     	}
     	
-    	return tmpURL.substring(0, tmpURL.length() - 2);
+    	tmpURL = tmpURL.substring(0, tmpURL.length() - 2);
+    	
+    	tmpURL += "&markers=color:blue|label:C|" + curPos.getLattitude() + "," + curPos.getLongitude();
+    	
+    	return tmpURL;
     }
     
     public byte[] getImage(String theURL)
