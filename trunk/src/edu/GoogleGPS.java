@@ -52,7 +52,7 @@ public class GoogleGPS {
 		try {
 			String strJSON = convertStreamToString(new URL(strURL).openStream());
 			
-			System.out.println(strJSON);
+			//System.out.println(strJSON);
 			
 			JSONObject tmpJSON = new JSONObject(strJSON);
 			JSONObject jsonRoute = tmpJSON.getJSONArray("routes")
