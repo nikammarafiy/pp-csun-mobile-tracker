@@ -1,5 +1,6 @@
 package edu;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -95,6 +96,15 @@ public class AppletSocket extends Thread {
         		String tmpStr = (String)tmpWrap.getData();
         		myParent.alertNotify(tmpStr);
         		myData = null;
+        		socket.closeSocket();
+        		try {
+					socket.openSocket();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		//socket.doConfig();
+        		
         	}
         	else
         	{
