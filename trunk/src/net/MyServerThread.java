@@ -35,6 +35,7 @@ public class MyServerThread extends Thread {
 	private GEORoute curRoute;
 	private GoogleGPS myGoog;
 	private long routeStartTime;
+	private boolean didIAlert;
 
 	/**
 	 * Constructor We need to pass the database through this constructor
@@ -49,6 +50,7 @@ public class MyServerThread extends Thread {
 		curParams = null;
 		curRoute = null;
 		myGoog = new GoogleGPS();
+		didIAlert = false;
 	}
 
 	/**
@@ -86,7 +88,7 @@ public class MyServerThread extends Thread {
 	private void checkParams()
 	{
 		//
-		if( curRoute == null || Main.getLastPosition() == null ) return;
+		if( curRoute == null || Main.getLastPosition() == null || didIAlert ) return;
 		
 		//
 		double feetAway = myGoog.getDistance(curRoute, Main.getLastPosition());
@@ -96,12 +98,15 @@ public class MyServerThread extends Thread {
 		if( feetAway > curParams.getDeviationFeet())
 		{
 			sendAlert("Your child has deviated.");
+			didIAlert = true;
 		}else if( loitTime > curParams.getLoiteringTime())
 		{
 			sendAlert("Your child is loitering.");
+			didIAlert = true;
 		} else if( totalTimeMillis > curParams.getRouteTime())
 		{
 			sendAlert("Your child has not reached their destination soon enough.");
+			didIAlert = true;
 		}
 		
 		//Decide what to do
