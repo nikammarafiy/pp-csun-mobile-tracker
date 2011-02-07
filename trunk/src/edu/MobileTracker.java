@@ -123,6 +123,7 @@ public class MobileTracker extends Applet implements ActionListener {
 			{
 				doSetup();
 			}
+			//else if( socket.)
 			
 			getMap();
 			return true;

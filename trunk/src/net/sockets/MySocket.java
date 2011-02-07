@@ -27,7 +27,7 @@ public abstract class MySocket {
     /**
      * Timeout
      */
-    public static final int SOC_TIMEOUT = 30000;
+    public static final int SOC_TIMEOUT = 90000;
     /**
      * Underlying socket
      */
@@ -113,6 +113,7 @@ public abstract class MySocket {
         try {
             //Set the timeout
             theSocket.setSoTimeout(socTimeout);
+            theSocket.setKeepAlive(true);
 
             //Set up streams
             socketOut = new ObjectOutputStream(theSocket.getOutputStream());
