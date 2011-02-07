@@ -1,3 +1,4 @@
+//7
 package edu;
 
 import java.io.ByteArrayOutputStream;
@@ -85,7 +86,10 @@ public class GEORoute {
     	
     	tmpURL = tmpURL.substring(0, tmpURL.length() - 2);
     	
-    	tmpURL += "&markers=color:blue|label:C|" + curPos.getLattitude() + "," + curPos.getLongitude();
+    	if( curPos != null)
+    	{
+    		tmpURL += "&markers=color:blue|label:C|" + curPos.getLattitude() + "," + curPos.getLongitude();
+    	}
     	
     	System.out.println(tmpURL);
     	
