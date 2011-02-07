@@ -74,7 +74,7 @@ public class MyServerThread extends Thread {
 	
 	private void prepTimer()
 	{
-		int delay = 5000; //10 Seconds
+		int delay = 20000; //10 Seconds
 		  ActionListener taskPerformer = new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
 		          checkParams();
@@ -92,6 +92,17 @@ public class MyServerThread extends Thread {
 		double feetAway = myGoog.getDistance(curRoute, Main.getLastPosition());
 		double loitTime = Main.checkLoitering();
 		double totalTimeMillis = System.currentTimeMillis() - routeStartTime;
+		
+		if( feetAway > curParams.getDeviationFeet())
+		{
+			sendAlert("Your child has deviated.");
+		}else if( loitTime > curParams.getLoiteringTime())
+		{
+			sendAlert("Your child is loitering.");
+		} else if( totalTimeMillis > curParams.getRouteTime())
+		{
+			sendAlert("Your child has not reached their destination soon enough.");
+		}
 		
 		//Decide what to do
 	}

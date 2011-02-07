@@ -13,7 +13,8 @@ public class ParamClass implements Serializable {
 	 *  @variable  deviationFeet Maximum range of distance that a child can be apart from the route.
 	 */
 	private static final long serialVersionUID = 1L;
-	double loiteringTime, deviationFeet, routeTime;
+	double loiteringTime, deviationFeet;
+	long routeTime;
 	
 	public ParamClass()
 	{
@@ -27,13 +28,13 @@ public class ParamClass implements Serializable {
 	{
 		this.loiteringTime = Double.parseDouble(loiteringTime);
 		this.deviationFeet = Double.parseDouble(deviationFeet);
-		this.routeTime = Double.parseDouble(routeTime);
+		this.routeTime = Long.parseLong(routeTime);
 	}
 	
 	/*
 	 * Constructor 2: Takes the maximum loitering time and deviation range.
 	 */
-	public ParamClass( double loiteringTime, double deviationFeet, double routeTime)
+	public ParamClass( double loiteringTime, double deviationFeet, long routeTime)
 	{
 		this.loiteringTime = loiteringTime;
 		this.deviationFeet = deviationFeet;
@@ -86,6 +87,11 @@ public class ParamClass implements Serializable {
 	public double getDeviationFeet()
 	{
 		return deviationFeet;
+	}
+	
+	public long getRouteTime()
+	{
+		return routeTime;
 	}
 	
 	
