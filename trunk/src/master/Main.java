@@ -3,6 +3,7 @@ package master;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
 
@@ -90,5 +91,15 @@ public class Main {
 		
 		return tmpTime;	//
 	}
+	
+	/*
+	public static double milliToMins(long millis)
+	{
+		return String.format("%d min, %d sec", 
+			    TimeUnit.MILLISECONDS.toMinutes(millis),
+			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
+			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+			);
+	}*/
 
 }
