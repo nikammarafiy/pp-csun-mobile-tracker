@@ -38,6 +38,7 @@ public class Main {
 	public static GEOPoint getLastPosition()
 	{
 		//
+		if( lastPoints.size() == 0) return null;
 		return lastPoints.get(0);
 	}
 	

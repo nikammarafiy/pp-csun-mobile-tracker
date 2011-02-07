@@ -87,6 +87,8 @@ public class GEORoute {
     	
     	tmpURL += "&markers=color:blue|label:C|" + curPos.getLattitude() + "," + curPos.getLongitude();
     	
+    	System.out.println(tmpURL);
+    	
     	return tmpURL;
     }
     
