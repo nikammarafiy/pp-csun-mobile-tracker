@@ -51,6 +51,9 @@ public class GoogleGPS {
 
 		try {
 			String strJSON = convertStreamToString(new URL(strURL).openStream());
+			
+			System.out.println(strJSON);
+			
 			JSONObject tmpJSON = new JSONObject(strJSON);
 			JSONObject jsonRoute = tmpJSON.getJSONArray("routes")
 					.getJSONObject(0);
@@ -64,6 +67,10 @@ public class GoogleGPS {
 				JSONObject curStart = curStep.getJSONObject("start_location");
 				GEOPoint tmpGeo = new GEOPoint(curStart.getString("lat"),
 						curStart.getString("lng"));
+				tmpRoute.addPoint(tmpGeo);
+				JSONObject curEnd = curStep.getJSONObject("end_location");
+				tmpGeo = new GEOPoint(curEnd.getString("lat"),
+						curEnd.getString("lng"));
 				tmpRoute.addPoint(tmpGeo);
 			}
 		} catch (JSONException ex) {

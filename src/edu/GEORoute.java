@@ -18,7 +18,7 @@ import master.Main;
 public class GEORoute {
 	
 	//Google url for map image
-	private final static String googURL = "http://maps.google.com/maps/api/staticmap?mode=walking&sensor=false&size=512x512&maptype=roadmap&path=weight:5|color:green|";
+	private final static String googURL = "http://maps.google.com/maps/api/staticmap?mode=walking&sensor=false&size=383x322&maptype=roadmap&path=weight:5|color:green|";
 
 	//Storage for the GEOPoints
     private ArrayList<GEOPoint> myRoute;
