@@ -68,7 +68,7 @@ public class MobileTracker extends Applet implements ActionListener {
 		enter = new Button("Submit");
 		add(enter);
 		
-		debug = new Button("Debug");
+		debug = new Button("Update");
 		add(debug);
 		
 		add(lblIcon);
@@ -98,7 +98,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	        inputRouteTime.addActionListener(this);
 	        
 	        didTheySubmit = false;
-	        prepTimer();
+	        //prepTimer();
 
 	}
 
@@ -124,7 +124,7 @@ public class MobileTracker extends Applet implements ActionListener {
 				doSetup();
 			}
 			
-			socket.sendData("SENDALRT", wrapperTypes.OTHER);
+			getMap();
 			return true;
 		}
 
@@ -234,7 +234,7 @@ public class MobileTracker extends Applet implements ActionListener {
 	private void doSetup() {
 		// Attempt to connect to the server
 		try {
-			socket = new AppletSocket("kitchensync.jhl.me", this);
+			socket = new AppletSocket("localhost", this);		//***************************
 			socket.start();
 			Thread.sleep(500);
 		} catch (Exception e) {
@@ -247,7 +247,7 @@ public class MobileTracker extends Applet implements ActionListener {
 		Logger.getLogger(Client.class.getName()).log(Level.INFO,
 		"Connection accepted by server.\n");
 	}
-	
+	/*
 	private void prepTimer()
 	{
 		int delay = 15000; //15 Seconds
@@ -257,7 +257,7 @@ public class MobileTracker extends Applet implements ActionListener {
 		      }
 		  };
 		  new Timer(delay, taskPerformer).start();
-	}
+	}*/
 	
 	private void getMap()
 	{
